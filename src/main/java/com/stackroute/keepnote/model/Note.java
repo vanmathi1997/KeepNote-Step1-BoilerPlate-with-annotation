@@ -7,21 +7,29 @@ import java.time.LocalDateTime;
  */
 public class Note {
 
+	private int noteId;
+	private String noteTitle;
+	private String noteContent;
+	private String noteStatus;
+	private LocalDateTime createdAt;
 	/*
 	 * This class should have five fields (noteId, noteTitle, noteContent,
 	 * noteStatus and createdAt). This class should also contain the getters and
 	 * setters for the fields. The value of createdAt should not be accepted from
 	 * the user but should be always initialized with the system date
 	 */
-	int noteId;
-	String noteTitle;
-	String noteContent;
-	String noteStatus;
-	LocalDateTime createdAt;
+
 	public Note() {
 	}
 
 	/* All the getters/setters definition should be implemented here */
+
+
+
+	@Override
+	public String toString() {
+		return null;
+	}
 
 	public int getNoteId() {
 		return noteId;
@@ -62,16 +70,21 @@ public class Note {
 	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
 	}
-	/* Override the toString() method */
-
-	@Override
-	public String toString() {
-		return "Note{" +
-				"noteId=" + noteId +
-				", noteTitle='" + noteTitle + '\'' +
-				", noteContent='" + noteContent + '\'' +
-				", noteStatus='" + noteStatus + '\'' +
-				", createdAt=" + createdAt +
-				'}';
-	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
