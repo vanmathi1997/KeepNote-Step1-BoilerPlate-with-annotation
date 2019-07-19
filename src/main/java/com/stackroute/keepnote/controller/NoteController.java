@@ -1,8 +1,10 @@
 package com.stackroute.keepnote.controller;
+import com.stackroute.keepnote.configuration.BeanConfig;
+import com.stackroute.keepnote.configuration.ServletConfig;
 import com.stackroute.keepnote.model.Note;
 import com.stackroute.keepnote.repository.NoteRepository;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +19,8 @@ import java.time.LocalDateTime;
 @Controller
 public class NoteController {
 
-	private NoteRepository noteRepository = getRepository();
+	private NoteRepository noteRepository=getRepository();
+
 
 	/*
 	 * From the problem statement, we can understand that the application
@@ -29,7 +32,6 @@ public class NoteController {
 	 * 3. Delete an existing note.
 	 * 4. Update an existing note.
 	 */
-
 	public void setNoteRepository(NoteRepository noteRepository) {
 		this.noteRepository = noteRepository;
 	}
@@ -46,7 +48,7 @@ public class NoteController {
 	 * Retrieve the NoteRepository object from the context.
 	 */
 	private ApplicationContext getAppContext() {
-		return new ClassPathXmlApplicationContext("beans.xml");
+		return new AnnotationConfigApplicationContext(BeanConfig.class);
 	}
 
 	private NoteRepository getRepository() {
@@ -57,7 +59,6 @@ public class NoteController {
 		ApplicationContext appContext = getAppContext();
 		return appContext.getBean("note", Note.class);
 	}
-
 
 	/*Define a handler method to read the existing notes by calling the getAllNotes() method
 	 * of the NoteRepository class and add it to the ModelMap which is an implementation of Map
@@ -93,7 +94,8 @@ public class NoteController {
 		}
 
 		else
-		{ Note note = getNote();
+		{
+			Note note=getNote();
 			note.setNoteId(noteId);
 			note.setNoteTitle(noteTitle);
 			note.setNoteContent(noteContent);
@@ -101,7 +103,6 @@ public class NoteController {
 			note.setCreatedAt(LocalDateTime.now());
 			noteRepository.addNote(note);
 
-			model.addObject("newNote", note);
 		}
 		model.addObject("notes", noteRepository.getAllNotes());
 		model.setViewName("index");

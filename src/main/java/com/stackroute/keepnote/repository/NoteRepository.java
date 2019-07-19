@@ -10,7 +10,6 @@ import com.stackroute.keepnote.model.Note;
  * of this class will be used by other parts of the applications such
  * as Controllers and Test Cases
  * */
-
 public class NoteRepository {
 
 	/* Declare a variable called "list" to store all the notes. */
